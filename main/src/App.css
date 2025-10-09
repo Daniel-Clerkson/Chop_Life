@@ -1,1 +1,20 @@
-@import "tailwindcss"
+@import "tailwindcss";
+
+
+.dropdown-content {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.group:hover .dropdown-content {
+  opacity: 1;
+  visibility: visible;
+  transition-delay: 0s;
+}
+
+.group.leave-delay .dropdown-content {
+  opacity: 0;
+  visibility: hidden;
+  transition-delay: 2s;
+}
