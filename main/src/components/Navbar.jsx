@@ -33,7 +33,7 @@ export default function Navbar() {
           <img
             src="../Images/logo.png"
             alt="ChopLife Logo"
-            className="h-12 w-auto"
+            className="h-30 w-auto"
           />
         </NavLink>
 
