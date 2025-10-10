@@ -42,6 +42,8 @@ const Register = () => {
       setEmail("");
       setPassword("");
       setAddress("");
+      console.log("logging req",res);
+      
       console.log(form)
     } catch (err) {
       setError(err.message || "Registration failed");

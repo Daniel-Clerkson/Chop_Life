@@ -9,14 +9,21 @@ const Cart = () => {
       name: "Jollof Rice",
       price: 2500,
       quantity: 2,
-      image: "/Images/jollof.png",
+      image: "/Images/img-1.jpg",
     },
     {
       id: 2,
       name: "Grilled Chicken",
       price: 3500,
       quantity: 1,
-      image: "/Images/chicken.png",
+      image: "./Images/img-2.jpg",
+    },
+    {
+      id: 3,
+      name: "Grilled Chicken",
+      price: 4500,
+      quantity: 1,
+      image: "./Images/img-4.jpg",
     },
   ]);
 

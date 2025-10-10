@@ -64,13 +64,13 @@ export default function ProductGrid() {
             <img
               src={product.image}
               alt={product.name}
-              className="h-64 w-full object-cover"
+              className="w-full h-40 object-cover rounded-md mb-4"
             />
             <div className="p-6 space-y-3">
               <h3 className="text-2xl font-semibold text-orange-600">
                 {product.name}
               </h3>
-              <p className="text-gray-700">{product.description}</p>
+              <p className="text-gray-700 mt-2">{product.description}</p>
               <div className="flex justify-between items-center text-sm text-gray-600">
                 <span>⭐ {product.rating}</span>
                 <span className="font-bold">{product.price}</span>
