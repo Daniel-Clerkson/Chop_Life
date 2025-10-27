@@ -10,20 +10,32 @@ const VendorList = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchVendors = async () => {
+    const fetchVendor = async () => {
       try {
-        const res = await fetch(`${API_BASE}/vendors`);
-        if (!res.ok) throw await res.json();
+        const res = await fetch(`${API_BASE}/vendor`, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
+        if (!res.ok) {
+          const errorData = await res.json();
+          throw new Error(
+            errorData.message || res.statusText || "Failed to fetch menu"
+          );
+        }
+
         const data = await res.json();
-        setVendors(Array.isArray(data) ? data : [data]); // handles single or multiple vendors
+        setVendors(data.data);
+        console.log(data.data)
       } catch (err) {
-        setError(err.message || "Failed to load vendors");
+        setError(err.message || "Failed to load menu");
       } finally {
         setLoading(false);
       }
     };
 
-    fetchVendors();
+    fetchVendor();
   }, []);
 
   return (

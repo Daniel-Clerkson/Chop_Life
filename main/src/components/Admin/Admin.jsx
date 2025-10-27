@@ -155,7 +155,6 @@ const AdminPanel = () => {
 
         <Section title="Delivery Team" data={deliveryGuys} />
       </div>
-      <Footer />
     </AdminLayout>
   );
 };
