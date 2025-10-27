@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { API_BASE } from ".././AuthComponents/Auth";
+import {BarLoader, BeatLoader, ClipLoader, MoonLoader, PacmanLoader, PulseLoader, RiseLoader} from "react-spinners"
 import Navbar from "../Navbar";
 import Footer from "../Footer";
 
@@ -48,7 +49,15 @@ const Menu = () => {
           </h1>
 
           {loading && (
-            <p className="text-center text-gray-600">Loading menu...</p>
+            <div className="w-full flex items-center justify-center">
+
+              <ClipLoader
+              color="purple"
+              size={150}
+              aria-label="Loading Spinner"
+              data-testid="loader"
+            />
+            </div>
           )}
           {error && <p className="text-center text-red-500">{error}</p>}
 

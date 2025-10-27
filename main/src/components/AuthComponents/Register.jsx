@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { API_BASE } from "./Auth";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router-dom";
+import { EyeOff, Eye } from "lucide-react";
 
 const Register = () => {
   const [name, setName] = useState("");
@@ -8,12 +9,21 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [address, setAddress] = useState("");
   const form = {
-    "name": name, "email": email, "password": password, "address": address,
-  }
+    name: name,
+    email: email,
+    password: password,
+    address: address,
+  };
 
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate()
+
+  const togglePasswordVisibility = () => {
+    setShowPassword((prev) => !prev);
+  };
 
   const registerUser = async () => {
     const res = await fetch(`${API_BASE}/auth/register`, {
@@ -42,10 +52,13 @@ const Register = () => {
       setEmail("");
       setPassword("");
       setAddress("");
-      console.log(form)
+      console.log(form);
+      setTimeout(()=>{
+        navigate("/login")
+      }, 2000)
     } catch (err) {
       setError(err.message || "Registration failed");
-      console.log(form)
+      console.log(form);
     } finally {
       setLoading(false);
     }
@@ -108,24 +121,26 @@ const Register = () => {
           </div>
 
           {/* Password */}
-          <div>
-            <label
-              htmlFor="password"
-              className="block text-sm font-medium text-gray-700 mb-1"
-            >
-              Password
-            </label>
+          <div className="relative w-full">
             <input
-              type="password"
-              id="password"
+              type={showPassword ? "text" : "password"}
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition"
+              placeholder="Enter Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="••••••••"
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition"
-              required
             />
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute right-6 top-5 text-gray-600"
+            >
+              {showPassword ? (
+                    <EyeOff className="w-5 h-5" />
+                  ) : (
+                    <Eye className="w-5 h-5" />
+                  )}
+            </button>
           </div>
-
           {/* Address */}
           <div>
             <label
@@ -159,9 +174,12 @@ const Register = () => {
 
         <p className="mt-4 text-center text-sm text-gray-600">
           Already have an account?{" "}
-          <Link to="/login" className="text-orange-600 font-medium hover:underline">
+          <Link
+            to="/login"
+            className="text-orange-600 font-medium hover:underline"
+          >
             Login
-          </ Link>
+          </Link>
         </p>
       </div>
     </div>

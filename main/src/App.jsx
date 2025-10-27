@@ -14,7 +14,7 @@ import {
   createRoutesFromElements,
   RouterProvider,
 } from "react-router-dom";
-import Login from "./components/AuthComponents/Login";
+import Login from "./components/AuthComponents/login2";
 import MainLayout from "./Layout/MainLayout";
 import Register from "./components/AuthComponents/Register";
 import Menu from "./components/MenuComponents/Menu";

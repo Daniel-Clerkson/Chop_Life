@@ -3,6 +3,7 @@ import { API_BASE } from "../AuthComponents/Auth";
 import VendorCard from "./VendorCard";
 import Footer from "../Footer";
 import Navbar from "../Navbar";
+import { ClipLoader } from "react-spinners";
 
 const VendorList = () => {
   const [vendors, setVendors] = useState([]);
@@ -27,7 +28,7 @@ const VendorList = () => {
 
         const data = await res.json();
         setVendors(data.data);
-        console.log(data.data)
+        console.log(data.data);
       } catch (err) {
         setError(err.message || "Failed to load menu");
       } finally {
@@ -40,29 +41,42 @@ const VendorList = () => {
 
   return (
     <>
-    <Navbar />
-    <div className="min-h-screen bg-gradient-to-br from-orange-50 to-purple-100 px-4 py-8">
-      <div className="max-w-6xl mx-auto">
-        {/* Logo */}
-        <div className="flex justify-center mb-6">
-          <img src="/Images/logo.png" alt="ChopLife Logo" className="h-16 drop-shadow-md" />
-        </div>
+      <Navbar />
+      <div className="min-h-screen bg-gradient-to-br from-orange-50 to-purple-100 px-4 py-8">
+        <div className="max-w-6xl mx-auto">
+          {/* Logo */}
+          <div className="flex justify-center mb-6">
+            <img
+              src="/Images/logo.png"
+              alt="ChopLife Logo"
+              className="h-16 drop-shadow-md"
+            />
+          </div>
 
-        <h1 className="text-4xl font-extrabold text-purple-800 text-center mb-8">
-          Our Trusted Vendors
-        </h1>
+          <h1 className="text-4xl font-extrabold text-purple-800 text-center mb-8">
+            Our Trusted Vendors
+          </h1>
 
-        {loading && <p className="text-center text-gray-600">Loading vendors...</p>}
-        {error && <p className="text-center text-red-500">{error}</p>}
+          {loading && (
+            <div className="w-full flex items-center justify-center">
+              <ClipLoader
+                color="purple"
+                size={150}
+                aria-label="Loading Spinner"
+                data-testid="loader"
+              />
+            </div>
+          )}
+          {error && <p className="text-center text-red-500">{error}</p>}
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {vendors.map((vendor, index) => (
-            <VendorCard key={index} vendor={vendor} />
-          ))}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {vendors.map((vendor, index) => (
+              <VendorCard key={index} vendor={vendor} />
+            ))}
+          </div>
         </div>
       </div>
-    </div>
-    <Footer />
+      <Footer />
     </>
   );
 };
